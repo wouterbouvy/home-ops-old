@@ -1,0 +1,3 @@
+---
+providerRegex: ^(delta|echo|foxtrot)$
+bypassDnsResolution: true
