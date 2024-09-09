@@ -48,6 +48,12 @@ tasks:
         fi
       - talhelper genconfig --config-file {{.TALHELPER_CONFIG_FILE}} --secret-file {{.TALHELPER_SECRET_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}}
 
+  gencommand-apply:
+    desc: (re)regenarate Talos apply command
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
+    cmds:
+      - talhelper gencommand apply --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} --extra-flags="--insecure"
+
   fetch-kubeconfig:
     desc: Fetch kubeconfig
     dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
