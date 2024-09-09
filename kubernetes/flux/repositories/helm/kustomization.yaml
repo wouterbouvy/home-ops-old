@@ -17,3 +17,4 @@ resources:
   - ./k8s-gateway.yaml
   - ./node-feature-discovery.yaml
   - ./intel.yaml
+  - ./longhorn-charts.yaml
