@@ -37,8 +37,6 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "10.0.8.254"
         mtu: 1500
-        vip:
-          ip: "10.0.8.100"
   - hostname: "echo"
     ipAddress: "10.0.8.20"
     installDiskSelector:
@@ -55,8 +53,6 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "10.0.8.254"
         mtu: 1500
-        vip:
-          ip: "10.0.8.100"
   - hostname: "foxtrot"
     ipAddress: "10.0.8.30"
     installDiskSelector:
@@ -73,8 +69,6 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "10.0.8.254"
         mtu: 1500
-        vip:
-          ip: "10.0.8.100"
 
 # Global patches
 patches:
@@ -91,6 +85,13 @@ patches:
         disabled: false
         servers:
           - 10.0.8.254
+  - # Disable eno1 interface
+    |-
+    machine:
+      network:
+        interfaces:
+          - interface: eno1
+            ignore: true
   - "@./patches/global/cluster-discovery.yaml"
   - "@./patches/global/containerd.yaml"
   - "@./patches/global/disable-search-domain.yaml"
