@@ -91,14 +91,6 @@ patches:
         disabled: false
         servers:
           - 10.0.8.254
-  - # Ignore eno1 interface
-    |-
-    machine:
-      network:
-        interfaces:
-          - interface: eno1
-            ignore: true
-
   - "@./patches/global/cluster-discovery.yaml"
   - "@./patches/global/containerd.yaml"
   - "@./patches/global/disable-search-domain.yaml"
