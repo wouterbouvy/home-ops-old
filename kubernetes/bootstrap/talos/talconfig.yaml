@@ -37,6 +37,10 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "10.0.8.254"
         mtu: 1500
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NL1T708722V
+        partitions:
+          - mountpoint: /var/mnt/longhorn
   - hostname: "echo"
     ipAddress: "10.0.8.20"
     installDiskSelector:
@@ -53,6 +57,10 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "10.0.8.254"
         mtu: 1500
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NX0T106248F
+        partitions:
+          - mountpoint: /var/mnt/longhorn
   - hostname: "foxtrot"
     ipAddress: "10.0.8.30"
     installDiskSelector:
@@ -69,6 +77,10 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "10.0.8.254"
         mtu: 1500
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0N410306N
+        partitions:
+          - mountpoint: /var/mnt/longhorn
 
 # Global patches
 patches:
