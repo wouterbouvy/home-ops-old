@@ -24,8 +24,9 @@ spec:
   values:
     defaultSettings:
       # backupTarget: "nfs://${NAS0_IP}:/volume1/longhorn-backups"
+      defaultSettings.createDefaultDiskLabeledNodes: true
       defaultReplicaCount: 3
-      defaultSettings.deletingConfirmationFlag: true
+      defaultSettings.deletingConfirmationFlag: true # TODO: Disable this when all works
     # longhornUI:
     #   replicas: 3
     ingress:
