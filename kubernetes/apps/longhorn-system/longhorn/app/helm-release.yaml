@@ -26,7 +26,7 @@ spec:
       # backupTarget: "nfs://${NAS0_IP}:/volume1/longhorn-backups"
       # createDefaultDiskLabeledNodes: true
       defaultDataPath: /var/mnt/longhorn
-      defaultReplicaCount: 3
+      defaultReplicaCount: 2
       # deletingConfirmationFlag: true # TODO: Disable this when all works
       v1DataEngine: true
       v2DataEngine: false
