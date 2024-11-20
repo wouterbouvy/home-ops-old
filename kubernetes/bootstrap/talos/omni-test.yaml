@@ -5,10 +5,8 @@ kubernetes:
 talos:
   version: v1.8.3
 patches:
-  - name: allowSchedulingOnControlPlanes
-    inline:
-      cluster:
-        allowSchedulingOnControlPlanes: true
+  - file: patches/global/kubelet.yaml
+  - file: patches/global/containerd.yaml
 ---
 kind: ControlPlane
 machines:
@@ -30,13 +28,16 @@ patches:
                   vlanId: 8
             - interface: eno1
               ignore: true
+  - file: patches/controller/cluster.yaml
+  # - file: patches/controller/disable-admission-controller-new.yaml
+  - file: patches/controller/etcd.yaml
 ---
 kind: Workers
 machines:
   - b5dd64c8-53a8-be17-4fbc-1c697ad8ff08 #Golf NUC11
-  - 4c4c4544-004b-3410-8043-b2c04f355032 #Hotel Wyse
-  - 4c4c4544-004c-3010-8034-c3c04f5a5a32 #India Wyse
-  - 4c4c4544-0046-3610-8043-b4c04f355032 #Juliett Wyse
+  # - 4c4c4544-004b-3410-8043-b2c04f355032 #Hotel Wyse
+  # - 4c4c4544-004c-3010-8034-c3c04f5a5a32 #India Wyse
+  # - 4c4c4544-0046-3610-8043-b4c04f355032 #Juliett Wyse
 ---
 kind: Machine
 name: 091ce700-c435-11e8-a46f-24a9ea0b0c00
@@ -47,13 +48,13 @@ patches:
         install:
           diskSelector:
             serial: "SS0L68728L1TH83107TD"
-  - name: longhorn
-    inline:
-      machine:
-        disks:
-        - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NL1T708722V
-          partitions:
-            - mountpoint: /var/mnt/longhorn
+  # - name: longhorn
+  #   inline:
+  #     machine:
+  #       disks:
+  #       - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NL1T708722V
+  #         partitions:
+  #           - mountpoint: /var/mnt/longhorn
 ---
 kind: Machine
 name: 3f1eae80-fa16-11e8-b2a5-75afac5e1000
@@ -64,13 +65,13 @@ patches:
         install:
           diskSelector:
             serial: "SS0L68728L1TH83107SV"
-  - name: longhorn
-    inline:
-      machine:
-        disks:
-        - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NX0T106248F
-          partitions:
-            - mountpoint: /var/mnt/longhorn
+  # - name: longhorn
+  #   inline:
+  #     machine:
+  #       disks:
+  #       - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NX0T106248F
+  #         partitions:
+  #           - mountpoint: /var/mnt/longhorn
 ---
 kind: Machine
 name: 5ea7c280-c43a-11e8-989b-7a47211d0c00
@@ -81,13 +82,13 @@ patches:
         install:
           diskSelector:
             serial: "SS0L68728L1TH83107TF"
-  - name: longhorn
-    inline:
-      machine:
-        disks:
-        - device: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0N410306N
-          partitions:
-            - mountpoint: /var/mnt/longhorn
+  # - name: longhorn
+  #   inline:
+  #     machine:
+  #       disks:
+  #       - device: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0N410306N
+  #         partitions:
+  #           - mountpoint: /var/mnt/longhorn
 ---
 kind: Machine
 name: b5dd64c8-53a8-be17-4fbc-1c697ad8ff08
@@ -112,9 +113,9 @@ patches:
                   - driver: mlx5_core
             - interface: enp91s0
               ignore: true
-  - name: installdisk
-    inline:
-      machine:
-        install:
-          diskSelector:
-            serial: "S674NF0R214511"
+#   - name: installdisk
+#     inline:
+#       machine:
+#         install:
+#           diskSelector:
+#             serial: "S674NF0R214511"
