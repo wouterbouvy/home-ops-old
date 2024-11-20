@@ -1,0 +1,9 @@
+machine:
+  certSANs:
+    - 127.0.0.1
+    - 10.0.8.100
+cluster:
+  apiServer:
+    certSANs:
+      - 127.0.0.1
+      - 10.0.8.100
