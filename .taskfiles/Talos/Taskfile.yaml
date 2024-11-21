@@ -120,17 +120,17 @@ tasks:
       # - talhelper genconfig --config-file {{.TALHELPER_CONFIG_FILE}} --secret-file {{.TALHELPER_SECRET_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}}
       # - talhelper gencommand apply --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} --extra-flags="--insecure" | bash
       # - until talhelper gencommand bootstrap --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} | bash; do sleep 10; done
-      # -
+      - omnictl get clusters
       # - task: fetch-kubeconfig
       # - task: install-helm-apps
-      - talosctl health --server=false
-    preconditions:
-      - msg: Missing talhelper config file
-        sh: test -f {{.TALHELPER_CONFIG_FILE}}
-      - msg: Missing Sops config file
-        sh: test -f {{.SOPS_CONFIG_FILE}}
-      - msg: Missing Sops Age key file
-        sh: test -f {{.AGE_FILE}}
+      # - talosctl health --server=false
+    # preconditions:
+    #   - msg: Missing talhelper config file
+    #     sh: test -f {{.TALHELPER_CONFIG_FILE}}
+    #   - msg: Missing Sops config file
+    #     sh: test -f {{.SOPS_CONFIG_FILE}}
+    #   - msg: Missing Sops Age key file
+    #     sh: test -f {{.AGE_FILE}}
 
   .reset:
     internal: true
