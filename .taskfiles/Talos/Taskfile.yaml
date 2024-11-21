@@ -113,6 +113,25 @@ tasks:
     prompt: This will destroy your cluster and reset the nodes back to maintenance mode... continue?
     cmd: talhelper gencommand reset --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} --extra-flags="--reboot {{- if eq .CLI_FORCE false }} --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL{{ end }} --graceful=false --wait=false" | bash
 
+  omni-bootstrap:
+    desc: Bootstrap the Talos cluster via Omni
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
+    cmds:
+      # - talhelper genconfig --config-file {{.TALHELPER_CONFIG_FILE}} --secret-file {{.TALHELPER_SECRET_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}}
+      # - talhelper gencommand apply --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} --extra-flags="--insecure" | bash
+      # - until talhelper gencommand bootstrap --config-file {{.TALHELPER_CONFIG_FILE}} --out-dir {{.TALHELPER_CLUSTER_DIR}} | bash; do sleep 10; done
+      # -
+      # - task: fetch-kubeconfig
+      # - task: install-helm-apps
+      - talosctl health --server=false
+    preconditions:
+      - msg: Missing talhelper config file
+        sh: test -f {{.TALHELPER_CONFIG_FILE}}
+      - msg: Missing Sops config file
+        sh: test -f {{.SOPS_CONFIG_FILE}}
+      - msg: Missing Sops Age key file
+        sh: test -f {{.AGE_FILE}}
+
   .reset:
     internal: true
     cmd: rm -rf {{.TALHELPER_CLUSTER_DIR}} {{.TALHELPER_SECRET_FILE}} {{.TALHELPER_CONFIG_FILE}}
