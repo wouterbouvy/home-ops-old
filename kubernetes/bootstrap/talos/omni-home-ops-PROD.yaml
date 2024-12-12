@@ -5,7 +5,7 @@ kubernetes:
   version: v1.32.0
 talos:
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-  version: v1.8.3
+  version: v1.9.0-beta.1
 patches:
   - file: patches/controller/cluster.yaml
   - file: patches/global/kubelet.yaml
@@ -17,7 +17,7 @@ patches:
 systemExtensions:
   - siderolabs/crun
   - siderolabs/gasket-driver
-  - siderolabs/i915-ucode
+  - siderolabs/i915
   - siderolabs/intel-ucode
   - siderolabs/iscsi-tools
   - siderolabs/util-linux-tools
@@ -47,7 +47,7 @@ patches:
 ---
 kind: Workers
 machines:
-  - b5dd64c8-53a8-be17-4fbc-1c697ad8ff08 #Golf NUC11
+  # - b5dd64c8-53a8-be17-4fbc-1c697ad8ff08 #Golf NUC11
 ---
 kind: Machine
 name: 091ce700-c435-11e8-a46f-24a9ea0b0c00 # Delta
@@ -58,7 +58,7 @@ patches:
         network:
           hostname: delta
           interfaces:
-            - interface: enp1s0f0
+            - interface: enp1s0f0np0
               dhcp: false
               vlans:
                 - vlanId: 8
@@ -79,13 +79,13 @@ patches:
         install:
           diskSelector:
             serial: "SS0L68728L1TH83107TD"
-  - name: longhorn
-    inline:
-      machine:
-        disks:
-        - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NL1T708722V
-          partitions:
-            - mountpoint: /var/mnt/longhorn
+  # - name: longhorn
+  #   inline:
+  #     machine:
+  #       disks:
+  #       - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NL1T708722V
+  #         partitions:
+  #           - mountpoint: /var/mnt/longhorn
 ---
 kind: Machine
 name: 3f1eae80-fa16-11e8-b2a5-75afac5e1000 # Echo
@@ -96,7 +96,7 @@ patches:
         network:
           hostname: echo
           interfaces:
-            - interface: enp1s0f0
+            - interface: enp1s0f0np0
               dhcp: false
               vlans:
                 - vlanId: 8
@@ -117,13 +117,13 @@ patches:
         install:
           diskSelector:
             serial: "SS0L68728L1TH83107SV"
-  - name: longhorn
-    inline:
-      machine:
-        disks:
-        - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NX0T106248F
-          partitions:
-            - mountpoint: /var/mnt/longhorn
+  # - name: longhorn
+  #   inline:
+  #     machine:
+  #       disks:
+  #       - device: /dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NX0T106248F
+  #         partitions:
+  #           - mountpoint: /var/mnt/longhorn
 ---
 kind: Machine
 name: 5ea7c280-c43a-11e8-989b-7a47211d0c00 # Foxtrot
@@ -134,7 +134,7 @@ patches:
         network:
           hostname: foxtrot
           interfaces:
-            - interface: enp1s0f0
+            - interface: enp1s0f0np0
               dhcp: false
               vlans:
                 - vlanId: 8
@@ -155,53 +155,53 @@ patches:
         install:
           diskSelector:
             serial: "SS0L68728L1TH83107TF"
-  - name: longhorn
-    inline:
-      machine:
-        disks:
-        - device: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0N410306N
-          partitions:
-            - mountpoint: /var/mnt/longhorn
----
-kind: Machine
-name: b5dd64c8-53a8-be17-4fbc-1c697ad8ff08
-patches:
-  - name: NIC config
-    inline:
-      machine:
-        network:
-          hostname: golf
-          interfaces:
-            - interface: bond0
-              dhcp: false
-              vlans:
-                - vlanId: 8
-                  addresses:
-                    - "10.0.8.40/24"
-                  routes:
-                    - network: 0.0.0.0/0
-                      gateway: 10.0.8.254
-              bond:
-                mode: 802.3ad
-                lacpRate: fast
-                xmitHashPolicy: layer3+4
-                miimon: 100
-                deviceSelectors:
-                  - driver: mlx5_core
-            - interface: enp91s0
-              ignore: true
-          nameservers:
-            - 10.0.8.254
-  - name: installdisk
-    inline:
-      machine:
-        install:
-          diskSelector:
-            serial: "S674NF0R214511"
-  - name: longhorn
-    inline:
-      machine:
-        disks:
-        - device: /dev/disk/by-id/nvme-MZ1LB1T9HBLS-000FB_S5XANA0T103945
-          partitions:
-            - mountpoint: /var/mnt/longhorn
+  # - name: longhorn
+  #   inline:
+  #     machine:
+  #       disks:
+  #       - device: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0N410306N
+  #         partitions:
+  #           - mountpoint: /var/mnt/longhorn
+# ---
+# kind: Machine
+# name: b5dd64c8-53a8-be17-4fbc-1c697ad8ff08
+# patches:
+#   - name: NIC config
+#     inline:
+#       machine:
+#         network:
+#           hostname: golf
+#           interfaces:
+#             - interface: bond0
+#               dhcp: false
+#               vlans:
+#                 - vlanId: 8
+#                   addresses:
+#                     - "10.0.8.40/24"
+#                   routes:
+#                     - network: 0.0.0.0/0
+#                       gateway: 10.0.8.254
+#               bond:
+#                 mode: 802.3ad
+#                 lacpRate: fast
+#                 xmitHashPolicy: layer3+4
+#                 miimon: 100
+#                 deviceSelectors:
+#                   - driver: mlx5_core
+#             - interface: enp91s0
+#               ignore: true
+#           nameservers:
+#             - 10.0.8.254
+#   - name: installdisk
+#     inline:
+#       machine:
+#         install:
+#           diskSelector:
+#             serial: "S674NF0R214511"
+#   - name: longhorn
+#     inline:
+#       machine:
+#         disks:
+#         - device: /dev/disk/by-id/nvme-MZ1LB1T9HBLS-000FB_S5XANA0T103945
+#           partitions:
+#             - mountpoint: /var/mnt/longhorn
