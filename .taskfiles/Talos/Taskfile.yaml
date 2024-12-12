@@ -138,6 +138,13 @@ tasks:
     cmds:
       - omnictl cluster template delete -f omni-home-ops-PROD.yaml
 
+  omni-sync:
+    desc: Bootstrap the Talos cluster via Omni
+    dir: "{{.KUBERNETES_DIR}}/bootstrap/talos"
+    cmds:
+      - omnictl cluster template validate -f omni-home-ops-PROD.yaml
+      - omnictl cluster template sync -v -f omni-home-ops-PROD.yaml
+
   .reset:
     internal: true
     cmd: rm -rf {{.TALHELPER_CLUSTER_DIR}} {{.TALHELPER_SECRET_FILE}} {{.TALHELPER_CONFIG_FILE}}
