@@ -19,7 +19,7 @@ function install {
 	PROG="omni"
 	ASPROG="omnictl"
 	MOVE="true"
-	RELEASE="latest" # v0.44.0
+	RELEASE="latest" # v0.48.3
 	INSECURE="false"
 	OUT_DIR="/usr/local/bin"
 	GH="https://github.com"

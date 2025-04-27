@@ -2,7 +2,7 @@ kind: Cluster
 name: home-ops-PROD
 kubernetes:
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
-  version: v1.33.0
+  version: v1.32.4
 talos:
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
   version: v1.9.5
@@ -24,9 +24,12 @@ systemExtensions:
 ---
 kind: ControlPlane
 machines:
-  - 091ce700-c435-11e8-a46f-24a9ea0b0c00 # Delta
-  - 3f1eae80-fa16-11e8-b2a5-75afac5e1000 # Echo
-  - 5ea7c280-c43a-11e8-989b-7a47211d0c00 # Foxtrot
+  # - 091ce700-c435-11e8-a46f-24a9ea0b0c00 # Delta
+  # - 3f1eae80-fa16-11e8-b2a5-75afac5e1000 # Echo
+  # - 5ea7c280-c43a-11e8-989b-7a47211d0c00 # Foxtrot
+  - 091ce700-c435-11e8-a46f-24a9ea0b0c00 # Hotel
+  - 55962a00-2edf-11e9-be0a-a50e34f61300 # India
+  - bc661400-2edc-11e9-b33f-222a5a021400 # Juliett
 patches:
   # - name: NIC config
   #   inline:
@@ -50,13 +53,13 @@ machines:
   # - b5dd64c8-53a8-be17-4fbc-1c697ad8ff08 #Golf NUC11
 ---
 kind: Machine
-name: 091ce700-c435-11e8-a46f-24a9ea0b0c00 # Delta
+name: 091ce700-c435-11e8-a46f-24a9ea0b0c00 # Hotel
 patches:
   - name: NIC config
     inline:
       machine:
         network:
-          hostname: delta
+          hostname: hotel
           interfaces:
             - interface: enp1s0f0np0
               dhcp: false
@@ -73,12 +76,12 @@ patches:
               ignore: true
           nameservers:
             - 10.0.8.254
-  - name: installdisk
-    inline:
-      machine:
-        install:
-          diskSelector:
-            serial: "SS0L68728L1TH83107TD"
+  # - name: installdisk
+  #   inline:
+  #     machine:
+  #       install:
+  #         diskSelector:
+  #           serial: "SS0L68728L1TH83107TD"
   # - name: longhorn
   #   inline:
   #     machine:
@@ -88,13 +91,13 @@ patches:
   #           - mountpoint: /var/mnt/longhorn
 ---
 kind: Machine
-name: 3f1eae80-fa16-11e8-b2a5-75afac5e1000 # Echo
+name: 55962a00-2edf-11e9-be0a-a50e34f61300 # India
 patches:
   - name: NIC config
     inline:
       machine:
         network:
-          hostname: echo
+          hostname: india
           interfaces:
             - interface: enp1s0f0np0
               dhcp: false
@@ -111,12 +114,12 @@ patches:
               ignore: true
           nameservers:
             - 10.0.8.254
-  - name: installdisk
-    inline:
-      machine:
-        install:
-          diskSelector:
-            serial: "SS0L68728L1TH83107SV"
+  # - name: installdisk
+  #   inline:
+  #     machine:
+  #       install:
+  #         diskSelector:
+  #           serial: "SS0L68728L1TH83107SV"
   # - name: longhorn
   #   inline:
   #     machine:
@@ -126,13 +129,13 @@ patches:
   #           - mountpoint: /var/mnt/longhorn
 ---
 kind: Machine
-name: 5ea7c280-c43a-11e8-989b-7a47211d0c00 # Foxtrot
+name: bc661400-2edc-11e9-b33f-222a5a021400 # Juliett
 patches:
   - name: NIC config
     inline:
       machine:
         network:
-          hostname: foxtrot
+          hostname: juliett
           interfaces:
             - interface: enp1s0f0np0
               dhcp: false
@@ -149,12 +152,12 @@ patches:
               ignore: true
           nameservers:
             - 10.0.8.254
-  - name: installdisk
-    inline:
-      machine:
-        install:
-          diskSelector:
-            serial: "SS0L68728L1TH83107TF"
+  # - name: installdisk
+  #   inline:
+  #     machine:
+  #       install:
+  #         diskSelector:
+  #           serial: "SS0L68728L1TH83107TF"
   # - name: longhorn
   #   inline:
   #     machine:
