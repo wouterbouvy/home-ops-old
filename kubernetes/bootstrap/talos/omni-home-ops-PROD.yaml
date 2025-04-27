@@ -5,7 +5,7 @@ kubernetes:
   version: v1.33.0
 talos:
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-  version: v1.10.0-beta.1
+  version: v1.9.5
 patches:
   - file: patches/controller/cluster.yaml
   - file: patches/global/kubelet.yaml
